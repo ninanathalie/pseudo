@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export async function submit(htmlContent: string, textInput: string) {
   console.log("Submitting HTML:", htmlContent, "Text Input:", textInput);
@@ -14,4 +15,6 @@ export async function submit(htmlContent: string, textInput: string) {
       body,
     },
   });
+
+  revalidatePath("/blogs");
 }
