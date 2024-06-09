@@ -8,6 +8,8 @@ import "@blocknote/mantine/style.css";
 import { uploadFiles } from "@/utils/uploadthing";
 import TextareaAutoSize from "react-textarea-autosize";
 import { submit } from "@/actions/new-blog";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface EditorProps {
   initialContent?: string;
@@ -40,7 +42,12 @@ export default function Editor({ initialContent, editable }: EditorProps) {
 
   return (
     <section>
-      <TextareaAutoSize value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Untitled" className="w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl font-medium focus:outline-none mb-4" />
+      <div className="back-btn relative">
+        <Link href="/blogs" className="absolute group top-2 -left-12 p-2 bg-neutral-100 hover:bg-neutral-200/60 rounded-md">
+          <ArrowLeft className="text-neutral-400 group-hover:text-neutral-600 w-4 h-4" />
+        </Link>
+        <TextareaAutoSize value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Untitled" className="w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl font-medium focus:outline-none mb-4" />
+      </div>
       <div className="-mx-12">
         <BlockNoteView editor={editor} editable={editable} theme="light" onChange={handleChange} />
       </div>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export const FloatingNav = ({
   navItems,
@@ -16,6 +17,8 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
+  const { isAuthenticated } = useKindeBrowserClient();
+
   const { scrollYProgress } = useScroll();
 
   const [visible, setVisible] = useState(false);
@@ -62,12 +65,26 @@ export const FloatingNav = ({
             <span className="hidden sm:block text-sm">{navItem.name}</span>
           </Link>
         ))}
-        <Link href="/login">
-          <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-            <span>Login</span>
-            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-          </button>
-        </Link>
+        {isAuthenticated ? (
+          <div className="py-2">
+            <Link href="/new-blog" className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full mr-2">
+              <span>Write</span>
+              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-teal-500 to-transparent  h-px" />
+            </Link>
+
+            <LogoutLink className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
+              <span>Logout</span>
+              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+            </LogoutLink>
+          </div>
+        ) : (
+          <Link href="/login">
+            <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
+              <span>Login</span>
+              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+            </button>
+          </Link>
+        )}
       </motion.div>
     </AnimatePresence>
   );
