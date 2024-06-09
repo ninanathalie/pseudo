@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bn-container * {
+  @apply font-outfit !important;
+}
+
+@layer components {
+  .natsu-blog h1 {
+    @apply text-5xl;
+  }
+
+  .natsu-blog h2 {
+    @apply text-4xl;
+  }
+
+  .natsu-blog h3 {
+    @apply text-2xl;
+  }
+
+  .natsu-blog p {
+    @apply font-light text-neutral-600 leading-normal;
+  }
+
+  .natsu-blog a {
+    @apply text-blue-500 hover:text-blue-300 font-medium;
+  }
+
+  .natsu-blog strong {
+    @apply font-bold;
+  }
+
+  .natsu-blog em {
+    @apply italic;
+  }
+
+  .natsu-blog u {
+    @apply underline;
+  }
+
+  .natsu-blog s {
+    @apply line-through;
+  }
+
+  .natsu-blog ol {
+    @apply list-decimal pl-5 my-4;
+  }
+
+  .natsu-blog ul {
+    @apply list-disc pl-5 my-4;
+  }
+
+  .natsu-blog li {
+    @apply my-2;
+  }
+
+  .natsu-blog input[type="checkbox"] {
+    @apply mr-2 h-5 w-5 text-blue-600 flex flex-row;
+  }
+
+  .natsu-blog img {
+    @apply my-4;
+  }
+}
