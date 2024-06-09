@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.className} flex flex-col min-h-screen px-4 bg-grid-small-neutral-400/[0.2] relative`}>
+      <body className={`${outfit.variable} flex flex-col min-h-screen px-4 bg-grid-small-neutral-400/[0.2] relative font-outfit`}>
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
         <Header />
