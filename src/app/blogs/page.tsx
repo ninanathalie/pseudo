@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import BlogLists from "@/components/blog-lists";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 export default function BlogPage() {
   return (
@@ -14,7 +15,9 @@ export default function BlogPage() {
       </div>
 
       <Suspense fallback="Loading...">
-        <BlogLists />
+        <TracingBeam className="px-6">
+          <BlogLists />
+        </TracingBeam>
       </Suspense>
     </main>
   );

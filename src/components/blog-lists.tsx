@@ -23,7 +23,7 @@ export default async function BlogLists() {
         const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
         return (
-          <div key={post.id} className="row-span-1 rounded-xl group transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4 mb-6">
+          <div key={post.id} className="row-span-1 rounded-xl group transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4 mb-6 lg:mb-10">
             <Link href={`/blogs/${post.id}`}>
               <div className="group-hover:translate-x-2 transition duration-200">
                 <h2 className="font-medium text-xl text-neutral-600 mt-2">{post.title}</h2>
