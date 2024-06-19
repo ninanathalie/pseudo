@@ -15,7 +15,7 @@ export default function BlogPage() {
       </div>
 
       <Suspense fallback="Loading...">
-        <TracingBeam className="px-6">
+        <TracingBeam>
           <BlogLists />
         </TracingBeam>
       </Suspense>
