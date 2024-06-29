@@ -25,7 +25,7 @@ export default function RootLayout({
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
         <Header />
-        <div className="z-10">{children}</div>
+        {children}
         <Footer />
       </body>
     </html>

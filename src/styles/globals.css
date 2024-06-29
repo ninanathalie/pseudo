@@ -20,7 +20,7 @@
   }
 
   .natsu-blog p {
-    @apply font-light text-neutral-600 leading-normal;
+    @apply font-light text-neutral-600 leading-8;
   }
 
   .natsu-blog a {
