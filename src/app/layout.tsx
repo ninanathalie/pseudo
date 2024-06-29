@@ -10,8 +10,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Letters of Natsu",
-  description: "A sanctuary of my daily musings",
+  title: "Letters Of Nathalie - A Sanctuary Of My Daily Musings",
 };
 
 export default function RootLayout({

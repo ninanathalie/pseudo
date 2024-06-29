@@ -16,7 +16,7 @@ export default async function BlogLists() {
       {posts.map((post) => {
         const body = post.body as string;
         const words = body ? body.split(" ") : [];
-        const excerpt = words.length > 30 ? words.slice(0, 30).join(" ") + "..." : post.body;
+        const excerpt = words.length > 30 ? words.slice(0, 40).join(" ") + " ..." : post.body;
 
         // Remove <p> tags and empty <p> tags
         const cleanExcerpt = excerpt
@@ -24,6 +24,7 @@ export default async function BlogLists() {
           .replace(/<\/?p[^>]*>/g, "")
           .replace(/<h[1-6][^>]*><\/h[1-6]>/g, "")
           .replace(/<\/?h[1-6][^>]*>/g, "")
+          .replace(/<br\s*\/?>/g, "")
           .trim();
         const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
