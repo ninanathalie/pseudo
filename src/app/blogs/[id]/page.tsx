@@ -4,8 +4,11 @@ import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { ArrowLeft } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function SinglePage({ params }: { params: { id: string } }) {
+  const { isAuthenticated } = getKindeServerSession();
+
   const post = await prisma.post.findUnique({
     where: {
       id: parseInt(params.id),
@@ -25,9 +28,11 @@ export default async function SinglePage({ params }: { params: { id: string } })
         </Link>
         <h1 className="text-4xl md:text-4xl font-medium mb-2">{post.title}</h1>
         <small className="mb-5 text-neutral-400 uppercase font-thin">{formattedDate}</small>
-        <Link href={`/blogs/${post.id}/edit`}>
-          <button className="fixed top-0 right-0 mt-4 mr-4 px-4 py-2 text-white bg-neutral-950 hover:bg-neutral-800 rounded-lg">Edit</button>
-        </Link>
+        {(await isAuthenticated()) && (
+          <Link href={`/blogs/${post.id}/edit`}>
+            <button className="fixed top-0 right-0 mt-4 mr-4 px-4 py-2 text-white bg-neutral-950 hover:bg-neutral-800 rounded-lg">Edit</button>
+          </Link>
+        )}
       </div>
       <div className="natsu-blog" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
     </main>
