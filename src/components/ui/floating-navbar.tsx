@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import React from "react";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 import { LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -14,78 +13,55 @@ export const FloatingNav = ({
     name: string;
     link: string;
     icon?: JSX.Element;
+    requiresAuth?: boolean;
   }[];
   className?: string;
 }) => {
   const { isAuthenticated } = useKindeBrowserClient();
 
-  const { scrollYProgress } = useScroll();
-
-  const [visible, setVisible] = useState(false);
-
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
-    if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
-
-      if (scrollYProgress.get() < 0.05) {
-        setVisible(false);
-      } else {
-        if (direction < 0) {
-          setVisible(true);
-        } else {
-          setVisible(false);
-        }
-      }
-    }
-  });
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        className={cn(
-          "flex max-w-fit  fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-8 py-2  items-center justify-center space-x-4",
-          className,
-        )}
-      >
-        {navItems.map((navItem: any, idx: number) => (
-          <Link key={`link=${idx}`} href={navItem.link} className={cn("relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500")}>
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm">{navItem.name}</span>
-          </Link>
-        ))}
-        {isAuthenticated ? (
-          <div className="py-2">
-            <Link href="/new-blog" className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full mr-2">
-              <span>Write</span>
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-teal-500 to-transparent  h-px" />
-            </Link>
+    <div
+      className={cn(
+        "flex max-w-fit fixed top-6 inset-x-0 mx-auto border border-transparent rounded-2xl bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-5 py-2 items-center justify-center space-x-4",
+        className,
+      )}
+    >
+      {navItems.map((navItem, idx) => {
+        const displayNav =
+          // If the link name is "logout", display only if the user is authenticated
+          navItem.name === "LogOut"
+            ? isAuthenticated
+            : // If the link name is "login", display only if the user is not authenticated
+            navItem.name === "LogIn"
+            ? !isAuthenticated
+            : // Otherwise, display if requiresAuth is false or if requiresAuth is true and the user is authenticated
+              !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
 
-            <LogoutLink className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-              <span>Logout</span>
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-            </LogoutLink>
-          </div>
-        ) : (
-          <Link href="/login">
-            <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-              <span>Login</span>
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-            </button>
-          </Link>
-        )}
-      </motion.div>
-    </AnimatePresence>
+        // If displayNav is false, do not render this navigation item
+        if (!displayNav) return null;
+
+        return (
+          <React.Fragment key={`nav-item-${idx}`}>
+            {navItem.name === "LogOut" ? (
+              <LogoutLink className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
+                <span>{navItem.icon}</span>
+                <span className={cn("absolute z-10 inline-block px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
+                  {navItem.name}
+                </span>
+              </LogoutLink>
+            ) : (
+              <Link href={navItem.link} className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
+                <span>{navItem.icon}</span>
+                <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
+                  {navItem.name}
+                </span>
+              </Link>
+            )}
+
+            {(navItem.name === "Blogs" || navItem.name === "LogOut" || navItem.name === "LogIn") && <div className="h-10 min-h-[1.4em] w-px self-stretch bg-zinc-200/90 m-auto"></div>}
+          </React.Fragment>
+        );
+      })}
+    </div>
   );
 };
