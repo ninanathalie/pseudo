@@ -11,11 +11,19 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        outfit: ["var(--font-outfit)"],
+        "polysans-thin": ['"PolySans-Thin"', "sans-serif"],
+        "polysans-regular": ['"PolySans-Regular"', "sans-serif"],
+        "polysans-bold": ['"PolySans-Bold"', "sans-serif"],
+        "ppcirka-regular": ['"PPCirka-Regular"', "serif"],
+        "ppcirka-bold": ['"PPCirka-Bold"', " serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      screens: {
+        "3xl": "1920px",
+        "4xl": "2560px",
       },
     },
   },

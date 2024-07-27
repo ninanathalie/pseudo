@@ -3,7 +3,44 @@
 @tailwind utilities;
 
 .bn-container * {
-  @apply font-outfit !important;
+  @apply font-polysans-thin !important;
+}
+
+@layer base {
+  @font-face {
+    font-family: "PolySans-Thin";
+    src: url("/fonts/PolySans-Slim.woff2") format("woff2"), url("/fonts/PolySans-Slim.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "PolySans-Regular";
+    src: url("/fonts/PolySans-Neutral.woff2") format("woff2"), url("/fonts/PolySans-Neutral.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "PolySans-Bold";
+    src: url("/fonts/PolySans-Median.woff2") format("woff2"), url("/fonts/PolySans-Median.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "PPCirka-Regular";
+    src: url("/fonts/PPCirka-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "PPCirka-Bold";
+    src: url("/fonts/PPCirka-Medium.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+  }
 }
 
 @layer components {
