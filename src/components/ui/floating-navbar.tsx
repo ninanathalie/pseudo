@@ -58,7 +58,7 @@ export const FloatingNav = ({
               </Link>
             )}
 
-            {(navItem.name === "Blogs" || navItem.name === "LogOut" || navItem.name === "LogIn") && <div className="h-10 min-h-[1.4em] w-px self-stretch bg-zinc-200/90"></div>}
+            {(navItem.name === "Blogs" || navItem.name === "LogOut" || navItem.name === "LogIn") && <div className="h-10 min-h-[1.4em] w-px self-stretch bg-zinc-200/90 m-auto"></div>}
           </React.Fragment>
         );
       })}
