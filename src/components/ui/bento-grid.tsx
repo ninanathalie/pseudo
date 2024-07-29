@@ -1,16 +1,25 @@
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 export const BentoGrid = ({ className, children }: { className?: string; children?: React.ReactNode }) => {
-  return <div className={cn("grid grid-cols-1 gap-4 mx-auto ", className)}>{children}</div>;
+  return <div className={cn("custom-bento grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto ", className)}>{children}</div>;
 };
 
-export const BentoGridItem = ({ className, title, body, header }: { className?: string; title?: string | React.ReactNode; body?: string | React.ReactNode; header?: React.ReactNode }) => {
+export const BentoGridItem = ({ className, title, description, date, header, icon, link }: { className?: string; title?: string | React.ReactNode; description?: string | React.ReactNode; date?: string; header?: React.ReactNode; icon?: React.ReactNode; link?: string }) => {
   return (
-    <div className={cn("row-span-1 rounded-xl group/bento transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4", className)}>
+    <Link href={link ?? "/"} className={cn("row-span-1 rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input p-6 bg-white/50 border-2 border-white justify-between flex flex-col space-y-4", className)}>
+      {header ? (
+        header
+      ) : (
+        <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl dark:bg-dot-white/[0.2] bg-dot-black/[0.2] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] border border-transparent dark:border-white/[0.2] bg-neutral-200 dark:bg-black"></div>
+      )}
+
       <div className="group-hover/bento:translate-x-2 transition duration-200">
-        <h2 className="font-medium text-xl text-neutral-600 mb-2 mt-2">{title}</h2>
-        <p className="font-light text-neutral-600">{body}</p>
+        {icon}
+        <div className="font-polysans-bold font-bold text-neutral-900 text-xl mb-2 mt-2 w-full whitespace-nowrap overflow-hidden text-ellipsis">{title}</div>
+        <div className="font-polysans-thin font-normal text-neutral-600 text-lg mb-2 whitespace-nowrap overflow-hidden text-ellipsis" dangerouslySetInnerHTML={{ __html: description || "" }} />
+        <div className="font-polysans-thin font-normal text-neutral-400 text-md">{date}</div>
       </div>
-    </div>
+    </Link>
   );
 };
