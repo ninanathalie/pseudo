@@ -1,6 +1,7 @@
 import Intro from "@/components/homepage/intro";
 import MovingText from "@/components/homepage/moving-text";
 import RecentBlogs from "@/components/homepage/recent-blogs";
+import FeaturedText from "@/components/homepage/featured-text";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Intro />
       <RecentBlogs />
       <MovingText />
+      <FeaturedText />
     </main>
   );
 }
