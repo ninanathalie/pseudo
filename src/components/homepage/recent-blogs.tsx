@@ -13,7 +13,7 @@ export default async function RecentBlogs() {
   });
 
   return (
-    <section className="flex items-center justify-center flex-col w-10/12 md:w-2/3 xl:w-10/12 3xl:w-2/4 max-w-[1440px]">
+    <section className="flex items-center justify-center flex-col w-10/12 3xl:w-2/4 max-w-[1440px]">
       <h2 className="font-polysans-bold text-center text-4xl lg:text-6xl mb-6">Fresh Musings</h2>
       <div className="flex items-center justify-center mt-6 lg:mt-10 gap-4">
         <BentoGrid className="mx-auto md:auto-rows-[20rem]">
