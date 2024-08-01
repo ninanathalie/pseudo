@@ -13,10 +13,10 @@ export default function FeaturedText() {
   }, [theme]);
 
   return (
-    <section className="w-10/12 md:w-2/3 xl:w-10/12 3xl:w-2/4 max-w-[1440px] pb-28 lg:pb-44 2xl:pb-60">
+    <section className="w-10/12 3xl:w-2/4 max-w-[1440px] pb-28 lg:pb-44 2xl:pb-60">
       <div className="relative w-full flex justify-center items-center">
         <div className="absolute flex justify-center items-center w-full h-full z-0">
-          <span className="font-polysans-bold text-center text-[5rem] md:text-8xl lg:text-[8rem] xl:text-[12rem] font-bold mb-4 tracking-[-0.09em]">do it scared</span>
+          <span className="font-polysans-bold text-center text-[4.2rem] md:text-[8rem] xl:text-[12rem] font-bold mb-4 tracking-[-0.09em] leading-none">do it scared</span>
         </div>
         <img src="/images/home-img-3.jpg" alt="do-it-scared" className="max-w-[80%] lg:max-w-[50%]" />
 

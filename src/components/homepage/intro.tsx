@@ -12,7 +12,7 @@ export default function Intro() {
   });
 
   return (
-    <section className="flex items-center justify-center flex-col w-10/12 md:w-2/3 xl:w-10/12 3xl:w-2/4 max-w-[1440px] mb-[20%] 4xl:mb-[10%]">
+    <section className="flex items-center justify-center flex-col w-10/12 3xl:w-2/4 max-w-[1440px] mb-[20%] 4xl:mb-[10%]">
       <Image src="/images/home-img-1.jpg" alt="Intro Image" width="142" height="142" quality="95" priority={true} className="w-24 h-24 xl:w-32 xl:h-32 rounded-full object-cover mb-6 md:mb-8" />
 
       <h1 className="font-polysans-bold text-center text-5xl lg:text-6xl xl:text-8xl font-bold mb-4">Hello, I'm Nathalie!</h1>
