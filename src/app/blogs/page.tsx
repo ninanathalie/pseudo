@@ -1,23 +1,15 @@
 import React, { Suspense } from "react";
-import BlogLists from "@/components/blog-lists";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { TracingBeam } from "@/components/ui/tracing-beam";
+import BlogLists from "@/components/blog/blog-lists";
 
 export default function BlogPage() {
   return (
-    <main className="container px-5 w-3/4 lg:w-1/2 max-w-4xl mx-auto flex flex-col justify-center my-14 z-10">
+    <main className="w-full flex flex-col items-center justify-center mb-16 lg:mb-24 mt-32 lg:mt-44 z-10">
       <div className="back-btn relative">
-        <Link href="/" className="absolute group top-2 -left-12 p-2 bg-neutral-100 hover:bg-neutral-200/60 rounded-md">
-          <ArrowLeft className="text-neutral-400 group-hover:text-neutral-600 w-4 h-4" />
-        </Link>
-        <h1 className="text-4xl md:text-5xl font-medium mb-10">Stories</h1>
+        <h1 className="font-polysans-bold text-center text-4xl lg:text-6xl mb-6">Stories</h1>
       </div>
 
       <Suspense fallback="Loading...">
-        <TracingBeam>
-          <BlogLists />
-        </TracingBeam>
+        <BlogLists />
       </Suspense>
     </main>
   );
