@@ -44,59 +44,90 @@
 }
 
 @layer components {
-  .natsu-blog h1 {
-    @apply text-5xl;
+  .blog-editor .bn-block,
+  .blog-editor .bn-block-content {
+    @apply w-full flex flex-col items-center justify-center;
   }
 
-  .natsu-blog h2 {
-    @apply text-4xl;
+  .blog-editor .bn-editor {
+    @apply bg-transparent px-0;
   }
 
-  .natsu-blog h3 {
-    @apply text-2xl;
+  .blog-editor .bn-side-menu {
+    @apply absolute left-6 top-1 flex flex-row w-max h-8 !important;
   }
 
-  .natsu-blog p {
-    @apply font-light text-neutral-600 leading-8;
+  .bn-inline-content .bn-inline-content-content {
+    @apply flex flex-col items-center justify-center;
   }
 
-  .natsu-blog a {
+  .natsu-blog h1,
+  h1.bn-inline-content {
+    @apply font-polysans-bold text-5xl mb-4 xl:mb-8 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+  }
+
+  .natsu-blog h2,
+  h2.bn-inline-content {
+    @apply font-polysans-bold text-4xl mb-4 xl:mb-8 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+  }
+
+  .natsu-blog h3,
+  h3.bn-inline-content {
+    @apply font-polysans-bold text-2xl mb-4 xl:mb-6 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+  }
+
+  .natsu-blog p,
+  p.bn-inline-content {
+    @apply font-polysans-thin text-lg mb-4 xl:mb-8 text-neutral-800 leading-8 w-10/12 max-w-4xl !important;
+  }
+
+  .natsu-blog a,
+  a .bn-inline-content {
     @apply text-blue-500 hover:text-blue-300 font-medium;
   }
 
-  .natsu-blog strong {
-    @apply font-bold;
+  .natsu-blog strong,
+  st.bn-inline-content rong {
+    @apply font-polysans-bold;
   }
 
-  .natsu-blog em {
+  .natsu-blog em,
+  em.bn-inline-content {
     @apply italic;
   }
 
-  .natsu-blog u {
+  .natsu-blog u,
+  u .bn-inline-content {
     @apply underline;
   }
 
-  .natsu-blog s {
+  .natsu-blog s,
+  s .bn-inline-content {
     @apply line-through;
   }
 
-  .natsu-blog ol {
+  .natsu-blog ol,
+  ol.bn-inline-content {
     @apply list-decimal pl-5 my-4;
   }
 
-  .natsu-blog ul {
+  .natsu-blog ul,
+  ul.bn-inline-content {
     @apply list-disc pl-5 my-4;
   }
 
-  .natsu-blog li {
+  .natsu-blog li,
+  li.bn-inline-content {
     @apply my-2;
   }
 
-  .natsu-blog input[type="checkbox"] {
+  .natsu-blog input[type="checkbox"],
+  input[type="checkbox"].bn-inline-content {
     @apply mr-2 h-5 w-5 text-blue-600 flex flex-row;
   }
 
-  .natsu-blog img {
-    @apply my-4;
+  .natsu-blog img,
+  .bn-visual-media-wrapper img {
+    @apply my-4 w-full h-auto rounded-3xl;
   }
 }

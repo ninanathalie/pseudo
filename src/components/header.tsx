@@ -30,7 +30,7 @@ export default function Header() {
     },
     {
       name: "LogOut",
-      link: "",
+      link: "/api/auth/logout",
       icon: <LogOut className="h-5 w-5" />,
       requiresAuth: true,
     },

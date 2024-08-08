@@ -11,9 +11,10 @@ export const FloatingNav = ({
 }: {
   navItems: {
     name: string;
-    link: string;
+    link?: string;
     icon?: JSX.Element;
     requiresAuth?: boolean;
+    useDiv?: boolean;
   }[];
   className?: string;
 }) => {
@@ -42,15 +43,15 @@ export const FloatingNav = ({
 
         return (
           <React.Fragment key={`nav-item-${idx}`}>
-            {navItem.name === "LogOut" ? (
-              <LogoutLink className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
+            {navItem.useDiv ? (
+              <div className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group cursor-pointer">
                 <span>{navItem.icon}</span>
-                <span className={cn("absolute z-10 inline-block px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
+                <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
                   {navItem.name}
                 </span>
-              </LogoutLink>
+              </div>
             ) : (
-              <Link href={navItem.link} className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
+              <Link href={navItem.link || "#"} className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
                 <span>{navItem.icon}</span>
                 <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
                   {navItem.name}

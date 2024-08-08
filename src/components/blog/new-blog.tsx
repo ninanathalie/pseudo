@@ -9,7 +9,8 @@ import { uploadFiles } from "@/utils/uploadthing";
 import TextareaAutoSize from "react-textarea-autosize";
 import { submit } from "@/actions/new-blog";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Send } from "lucide-react";
+import { FloatingNav } from "@/components/ui/floating-navbar";
 
 interface EditorProps {
   initialContent?: string;
@@ -40,19 +41,24 @@ export default function Editor({ initialContent, editable }: EditorProps) {
     submit(html, textInput);
   };
 
+  const navItems = [
+    {
+      name: "Edit",
+      useDiv: true,
+      icon: <Send className="h-5 w-5" />,
+    },
+  ];
+
   return (
-    <section>
-      <div className="back-btn relative">
-        <Link href="/blogs" className="absolute group top-2 -left-12 p-2 bg-neutral-100 hover:bg-neutral-200/60 rounded-md">
-          <ArrowLeft className="text-neutral-400 group-hover:text-neutral-600 w-4 h-4" />
-        </Link>
-        <TextareaAutoSize value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Untitled" className="w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl font-medium focus:outline-none mb-4" />
+    <section className="w-full max-w-4xl">
+      <div className="mb-8 text-center w-full">
+        <TextareaAutoSize value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
       </div>
-      <div className="-mx-12">
-        <BlockNoteView editor={editor} editable={editable} theme="light" onChange={handleChange} />
+      <div className="w-full">
+        <BlockNoteView className="blog-editor" editor={editor} editable={editable} theme="light" onChange={handleChange} />
       </div>
-      <button className="fixed top-0 right-0 mt-4 mr-4 px-4 py-2 text-white bg-neutral-950 hover:bg-neutral-800 rounded-lg" onClick={handleSubmit}>
-        Submit
+      <button className="hidden md:flex" onClick={handleSubmit}>
+        <FloatingNav navItems={navItems} className="mr-5 px-4 cursor-not-allowed" />
       </button>
     </section>
   );
