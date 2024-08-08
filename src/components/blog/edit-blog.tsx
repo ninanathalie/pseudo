@@ -1,15 +1,15 @@
 "use client";
 
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
-import Link from "next/link";
 import { BlockNoteEditor } from "@blocknote/core";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import TextareaAutoSize from "react-textarea-autosize";
-import { ArrowLeft } from "lucide-react";
+import { Save } from "lucide-react";
 import { updatePost } from "@/actions/update-post";
 import { cn } from "@/utils/cn";
+import { FloatingNav } from "@/components/ui/floating-navbar";
 
 interface UpdatePostProps {
   post: {
@@ -55,25 +55,30 @@ export default function UpdatePost({ post }: UpdatePostProps) {
     setIsContentChanged(false);
   };
 
+  const navItems = [
+    {
+      name: "Save",
+      useDiv: true,
+      icon: <Save className="h-5 w-5" />,
+    },
+  ];
+
   return (
     <section>
-      <div className="back-btn relative">
-        <Link href={`/blogs/${post.id}`} className="absolute group top-2 -left-12 p-2 bg-neutral-100 hover:bg-neutral-200/60 rounded-md">
-          <ArrowLeft className="text-neutral-400 group-hover:text-neutral-600 w-4 h-4" />
-        </Link>
-        <TextareaAutoSize value={textInput} onChange={handleTextInputChange} placeholder="Untitled" className="w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl font-medium focus:outline-none mb-4" />
+      <div className="mb-8 text-center w-full">
+        <TextareaAutoSize value={textInput} onChange={handleTextInputChange} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
       </div>
       <div className="-mx-12">
-        <BlockNoteView editor={editor} editable={true} theme="light" onChange={handleChange} />
+        <BlockNoteView className="blog-editor" editor={editor} editable={true} theme="light" onChange={handleChange} />
       </div>
       <button
-        className={cn("fixed top-0 right-0 mt-4 mr-4 px-4 py-2 text-white bg-neutral-950 hover:bg-neutral-800 rounded-lg", {
+        className={cn("hidden md:flex", {
           "cursor-not-allowed opacity-50": isSubmitting || !isContentChanged,
         })}
         onClick={handleSubmit}
         disabled={isSubmitting || !isContentChanged}
       >
-        Update
+        <FloatingNav navItems={navItems} className="mr-5 px-4 cursor-not-allowed" />
       </button>
     </section>
   );

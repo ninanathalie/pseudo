@@ -1,10 +1,10 @@
 import React from "react";
-import Link from "next/link";
 import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { ArrowLeft } from "lucide-react";
+import { PencilLine } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { FloatingNav } from "@/components/ui/floating-navbar";
 
 export default async function SinglePage({ params }: { params: { id: string } }) {
   const { isAuthenticated } = getKindeServerSession();
@@ -20,21 +20,28 @@ export default async function SinglePage({ params }: { params: { id: string } })
 
   const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
+  const navItems = [
+    {
+      name: "Edit",
+      link: `/blogs/${post.id}/edit`,
+      icon: <PencilLine className="h-5 w-5" />,
+    },
+  ];
+
   return (
-    <main className="container px-5 w-3/4 lg:w-1/2 max-w-4xl mx-auto flex flex-col justify-center my-14 z-10">
-      <div className="back-btn relative mb-8">
-        <Link href="/blogs" className="absolute group top-2 -left-12 p-2 bg-neutral-100 hover:bg-neutral-200/60 rounded-md">
-          <ArrowLeft className="text-neutral-400 group-hover:text-neutral-600 w-4 h-4" />
-        </Link>
-        <h1 className="text-4xl md:text-4xl font-medium mb-2">{post.title}</h1>
-        <small className="mb-5 text-neutral-400 uppercase font-thin">{formattedDate}</small>
-        {(await isAuthenticated()) && (
-          <Link href={`/blogs/${post.id}/edit`}>
-            <button className="fixed top-0 right-0 mt-4 mr-4 px-4 py-2 text-white bg-neutral-950 hover:bg-neutral-800 rounded-lg">Edit</button>
-          </Link>
-        )}
+    <main className="w-full flex flex-col items-center justify-center mb-16 lg:mb-24 mt-32 lg:mt-44 z-10">
+      <div className="mb-8 text-center max-w-4xl">
+        <h1 className="text-4xl md:text-6xl font-polysans-bold mb-2 leading-10">{post.title}</h1>
+        <small className="mb-5 text-neutral-400 uppercase  font-polysans-thin">{formattedDate}</small>
       </div>
-      <div className="natsu-blog" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
+
+      {(await isAuthenticated()) && (
+        <div className="hidden md:flex">
+          <FloatingNav navItems={navItems} className="mr-5 px-4" />
+        </div>
+      )}
+
+      <div className="natsu-blog flex flex-col items-center justify-center" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
     </main>
   );
 }
