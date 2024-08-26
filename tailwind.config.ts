@@ -54,6 +54,7 @@ const config: Config = {
       );
     },
   ],
+  darkMode: "class",
 };
 export default withUt(config);
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export const FloatingNav = ({
   navItems,
@@ -15,6 +15,8 @@ export const FloatingNav = ({
     icon?: JSX.Element;
     requiresAuth?: boolean;
     useDiv?: boolean;
+    useComponent?: boolean;
+    component?: JSX.Element;
   }[];
   className?: string;
 }) => {
@@ -28,22 +30,15 @@ export const FloatingNav = ({
       )}
     >
       {navItems.map((navItem, idx) => {
-        const displayNav =
-          // If the link name is "logout", display only if the user is authenticated
-          navItem.name === "LogOut"
-            ? isAuthenticated
-            : // If the link name is "login", display only if the user is not authenticated
-            navItem.name === "LogIn"
-            ? !isAuthenticated
-            : // Otherwise, display if requiresAuth is false or if requiresAuth is true and the user is authenticated
-              !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
+        const displayNav = navItem.name === "LogOut" ? isAuthenticated : navItem.name === "LogIn" ? !isAuthenticated : !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
 
-        // If displayNav is false, do not render this navigation item
         if (!displayNav) return null;
 
         return (
           <React.Fragment key={`nav-item-${idx}`}>
-            {navItem.useDiv ? (
+            {navItem.useComponent ? (
+              navItem.component
+            ) : navItem.useDiv ? (
               <div className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group cursor-pointer">
                 <span>{navItem.icon}</span>
                 <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
