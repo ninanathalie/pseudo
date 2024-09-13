@@ -1,5 +1,6 @@
 import React from "react";
 import { FloatingNav } from "@/components/ui/floating-navbar";
+import ThemeSwitch from "@/components/ui/theme-switch";
 import { Home, NotebookPen, Sun, FilePlus2, LogIn, LogOut } from "lucide-react";
 
 export default function Header() {
@@ -36,9 +37,9 @@ export default function Header() {
     },
     {
       name: "Light",
-      link: "/",
-      icon: <Sun className="h-5 w-5" />,
       requiresAuth: false,
+      useComponent: true,
+      component: <ThemeSwitch />,
     },
   ];
   return (

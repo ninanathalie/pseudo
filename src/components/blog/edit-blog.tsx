@@ -10,6 +10,7 @@ import { Save } from "lucide-react";
 import { updatePost } from "@/actions/update-post";
 import { cn } from "@/utils/cn";
 import { FloatingNav } from "@/components/ui/floating-navbar";
+import BackgroundBlob from "@/components/ui/background-blob";
 
 interface UpdatePostProps {
   post: {
@@ -64,7 +65,9 @@ export default function UpdatePost({ post }: UpdatePostProps) {
   ];
 
   return (
-    <section>
+    <section className="relative">
+      <BackgroundBlob variant="center" />
+
       <div className="mb-8 text-center w-full">
         <TextareaAutoSize value={textInput} onChange={handleTextInputChange} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
       </div>

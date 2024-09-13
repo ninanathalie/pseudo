@@ -63,22 +63,22 @@
 
   .natsu-blog h1,
   h1.bn-inline-content {
-    @apply font-polysans-bold text-5xl mb-4 xl:mb-8 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+    @apply font-polysans-bold text-5xl mb-4 xl:mb-8 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog h2,
   h2.bn-inline-content {
-    @apply font-polysans-bold text-4xl mb-4 xl:mb-8 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+    @apply font-polysans-bold text-4xl mb-4 xl:mb-8 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog h3,
   h3.bn-inline-content {
-    @apply font-polysans-bold text-2xl mb-4 xl:mb-6 text-neutral-900 leading-10 w-10/12 max-w-4xl !important;
+    @apply font-polysans-bold text-2xl mb-4 xl:mb-6 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog p,
   p.bn-inline-content {
-    @apply font-polysans-thin text-lg mb-4 xl:mb-8 text-neutral-800 leading-8 w-10/12 max-w-4xl !important;
+    @apply font-polysans-thin text-lg mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog a,
@@ -129,5 +129,17 @@
   .natsu-blog img,
   .bn-visual-media-wrapper img {
     @apply my-4 w-full h-auto rounded-3xl;
+  }
+
+  /* Text Stroke */
+  .text-stroke {
+    @apply font-bold text-transparent;
+    -webkit-text-stroke: 1.5px black;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .text-stroke {
+      -webkit-text-stroke: 1.5px white;
+    }
   }
 }

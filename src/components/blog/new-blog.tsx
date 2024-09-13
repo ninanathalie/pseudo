@@ -8,9 +8,9 @@ import "@blocknote/mantine/style.css";
 import { uploadFiles } from "@/utils/uploadthing";
 import TextareaAutoSize from "react-textarea-autosize";
 import { submit } from "@/actions/new-blog";
-import Link from "next/link";
-import { ArrowLeft, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { FloatingNav } from "@/components/ui/floating-navbar";
+import BackgroundBlob from "@/components/ui/background-blob";
 
 interface EditorProps {
   initialContent?: string;
@@ -50,7 +50,9 @@ export default function Editor({ initialContent, editable }: EditorProps) {
   ];
 
   return (
-    <section className="w-full max-w-4xl">
+    <section className="relative w-full max-w-4xl">
+      <BackgroundBlob variant="center" />
+
       <div className="mb-8 text-center w-full">
         <TextareaAutoSize value={textInput} onChange={(e) => setTextInput(e.target.value)} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
       </div>
