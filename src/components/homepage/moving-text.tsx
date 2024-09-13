@@ -30,7 +30,7 @@ export default function MovingText() {
 
 export function TextStroke({ children }: { children: string }) {
   return (
-    <span className="font-polysans-bold text-center text-6xl lg:text-8xl xl:text-9xl font-bold mb-4" style={{ color: "transparent", WebkitTextStroke: "1.5px black" }}>
+    <span className={`font-polysans-bold text-center text-6xl lg:text-8xl xl:text-9xl font-bold mb-4 stroke-current`} style={{ WebkitTextFillColor: "transparent", WebkitTextStroke: "1.5px" }}>
       {children}
     </span>
   );
