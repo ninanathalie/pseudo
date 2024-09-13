@@ -14,14 +14,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-gradient-to-bl from-indigo-200 via-teal-100/10 to-indigo-200">
-      <body className="flex flex-col min-h-screen bg-grid-small-neutral-400/[0.2] relative font-polysans-thin">
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-
+    <html lang="en">
+      <body>
         <ThemeContextProvider>
-          <Header />
-          {children}
-          <Footer />
+          <div className="flex flex-col min-h-screen bg-grid-small-neutral-400/[0.2] relative font-polysans-thin dark:text-neutral-100 dark:bg-slate-900 overflow-x-hidden">
+            <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white dark:bg-slate-900 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </ThemeContextProvider>
       </body>
     </html>
