@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
@@ -7,12 +8,13 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import BackgroundBlob from "@/components/ui/background-blob";
 
-export default async function SinglePage({ params }: { params: { id: string } }) {
+export default async function SinglePage({ params }: { params: { slug: string } }) {
   const { isAuthenticated } = getKindeServerSession();
 
+  // Fetch the post using the slug instead of the id
   const post = await prisma.post.findUnique({
     where: {
-      id: parseInt(params.id),
+      slug: params.slug,
     },
   });
   if (!post) {
@@ -24,7 +26,7 @@ export default async function SinglePage({ params }: { params: { id: string } })
   const navItems = [
     {
       name: "Edit",
-      link: `/blogs/${post.id}/edit`,
+      link: `/blogs/${post.slug}/edit`,
       icon: <PencilLine className="h-5 w-5" />,
     },
   ];
