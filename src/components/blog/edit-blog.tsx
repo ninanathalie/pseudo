@@ -14,7 +14,7 @@ import BackgroundBlob from "@/components/ui/background-blob";
 
 interface UpdatePostProps {
   post: {
-    id: number;
+    slug: string;
     title: string;
     body: string | null;
   };
@@ -51,7 +51,7 @@ export default function UpdatePost({ post }: UpdatePostProps) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     const html = await editor.blocksToHTMLLossy(editor.document);
-    await updatePost(post.id, html, textInput);
+    await updatePost(post.slug, html, textInput);
     setIsSubmitting(false);
     setIsContentChanged(false);
   };

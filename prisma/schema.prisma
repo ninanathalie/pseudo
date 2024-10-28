@@ -12,10 +12,9 @@ datasource db {
 }
 
 model Post {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
-  body      String?
-  published Boolean  @default(false)
+  slug      String   @unique
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  body      String
 }
