@@ -32,7 +32,7 @@ export default async function RecentBlogs() {
               .replace(/<br\s*\/?>/g, "")
               .trim();
 
-            return <BentoGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.id}`} className={gridClass} />;
+            return <BentoGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} className={gridClass} />;
           })}
         </BentoGrid>
       </div>
