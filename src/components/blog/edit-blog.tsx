@@ -11,6 +11,7 @@ import { updatePost } from "@/actions/update-post";
 import { cn } from "@/utils/cn";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import BackgroundBlob from "@/components/ui/background-blob";
+import { useRouter } from "next/navigation";
 
 interface UpdatePostProps {
   post: {
@@ -21,6 +22,7 @@ interface UpdatePostProps {
 }
 
 export default function UpdatePost({ post }: UpdatePostProps) {
+  const router = useRouter();
   const [html, setHTML] = useState("");
   const [textInput, setTextInput] = useState(post.title);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +53,15 @@ export default function UpdatePost({ post }: UpdatePostProps) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     const html = await editor.blocksToHTMLLossy(editor.document);
-    await updatePost(post.slug, html, textInput);
+
+    // Call the server-side function and get the updated slug
+    const updatedSlug = await updatePost(post.slug, html, textInput);
+
+    // If the slug has changed, navigate to the new route
+    if (updatedSlug !== post.slug) {
+      router.push(`/blogs/${updatedSlug}`);
+    }
+
     setIsSubmitting(false);
     setIsContentChanged(false);
   };
