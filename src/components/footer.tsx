@@ -1,26 +1,36 @@
 import React from "react";
-import { FaThreads, FaInstagram } from "react-icons/fa6";
-import { FiYoutube } from "react-icons/fi";
+import { TextDisperse } from "@/components/ui/text-disperse";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const socialLinks = [
+    {
+      name: "INSTAGRAM",
+      url: "https://www.instagram.com/thatgirlnathalie",
+    },
+    {
+      name: "THREADS",
+      url: "https://www.threads.net/thatgirlnathalie",
+    },
+    {
+      name: "YOUTUBE",
+      url: "https://www.youtube.com/@thatgirlnathalie",
+    },
+  ];
+
   return (
-    <footer className="w-full mt-auto text-center text-white p-16 md:pt-24 bg-black rounded-t-3xl z-10">
-      <h2 className="font-polysans-bold text-center text-4xl md:text-5xl mb-4">Get In Touch</h2>
-      <p className="font-polysans-thin tracking-wide mb-4 text-neutral-200">
+    <footer className="w-full mt-auto text-center text-white/90 p-16 md:pt-32 lg:pt-40 bg-black rounded-t-3xl z-10">
+      <p className="text-lg font-light tracking-wide text-neutral-200 mb-4 lg:mb-8">
         If you found this blog, you're already halfway to being awesome. <br /> The other half? Well, you should follow me on my socials!
       </p>
-      <div className="flex justify-center pb-10 md:pb-16">
-        <a href="https://instagram.com/thatgirlnathalie" target="_blank" className="text-white px-4 py-2">
-          <FaInstagram className="w-6 h-6 lg:w-8 lg:h-8" />
-        </a>
-        <a href="https://www.youtube.com/@thatgirlnathalie" target="_blank" className="text-white px-4 py-2">
-          <FiYoutube className="w-6 h-6 lg:w-8 lg:h-8" />
-        </a>
-        <a href="https://threads.net/thatgirlnathalie" target="_blank" className="text-white px-4 py-2">
-          <FaThreads className="w-6 h-6 lg:w-8 lg:h-8" />
-        </a>
+      <h2 className="font-polysans-bold text-center lg:text-3xl text-white/25 mb-4 lg:mb-8">SHOOT ME A DM OR JUST SAY HI</h2>
+      <div className="flex flex-col items-center justify-center pb-16 md:pb-32">
+        {socialLinks.map(({ name, url }) => (
+          <a href={url} target="_blank" rel="noopener noreferrer" key={name}>
+            <TextDisperse>{name}</TextDisperse>
+          </a>
+        ))}
       </div>
       <small className="mb-2 mx-auto font-extralight text-neutral-600">
         Designed & Built by{" "}

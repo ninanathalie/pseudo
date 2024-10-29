@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.bn-container * {
-  @apply font-polysans-thin !important;
-}
-
 @layer base {
   @font-face {
     font-family: "PolySans-Thin";
@@ -73,12 +69,12 @@
 
   .natsu-blog h3,
   h3.bn-inline-content {
-    @apply font-polysans-bold text-2xl mb-4 xl:mb-6 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
+    @apply text-2xl mb-4 xl:mb-6 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog p,
   p.bn-inline-content {
-    @apply font-polysans-thin text-lg mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
+    @apply text-lg font-light mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
   }
 
   .natsu-blog a,
@@ -87,8 +83,8 @@
   }
 
   .natsu-blog strong,
-  st.bn-inline-content rong {
-    @apply font-polysans-bold;
+  .bn-inline-content strong {
+    @apply font-semibold;
   }
 
   .natsu-blog em,
