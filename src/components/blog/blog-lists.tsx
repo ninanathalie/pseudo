@@ -1,5 +1,5 @@
 import React from "react";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import { BlogGrid, BlogGridItem } from "@/components/ui/blog-grid";
 import { format } from "date-fns";
 import prisma from "@/lib/db";
 
@@ -15,7 +15,7 @@ export default async function RecentBlogs() {
   return (
     <section className="flex items-center justify-center flex-col w-10/12 3xl:w-2/4 max-w-[1440px]">
       <div className="flex w-full items-center justify-center mt-6 lg:mt-10 gap-4">
-        <BentoGrid className="mx-auto md:auto-rows-[20rem]">
+        <BlogGrid className="mx-auto md:auto-rows-[20rem]">
           {recentPosts.map((post, index) => {
             const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
@@ -32,9 +32,9 @@ export default async function RecentBlogs() {
               .replace(/<br\s*\/?>/g, "")
               .trim();
 
-            return <BentoGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} className={gridClass} />;
+            return <BlogGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} className={gridClass} />;
           })}
-        </BentoGrid>
+        </BlogGrid>
       </div>
     </section>
   );
