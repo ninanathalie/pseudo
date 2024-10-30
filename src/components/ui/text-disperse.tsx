@@ -46,7 +46,7 @@ export const TextDisperse = ({ children }: TextDisperseProps) => {
   const getChars = (element: ReactNode) => {
     const word = element as string;
     return word.split("").map((char, i) => (
-      <motion.p custom={i} variants={disperse} animate={isAnimated ? "open" : "closed"} key={`${char}-${i}`} className="font-polysans-bold text-center text-4xl md:text-5xl lg:text-8xl">
+      <motion.p custom={i} variants={disperse} animate={isAnimated ? "open" : "closed"} key={`${char}-${i}`} className="font-polysans-bold text-center text-5xl lg:text-8xl">
         {char}
       </motion.p>
     ));

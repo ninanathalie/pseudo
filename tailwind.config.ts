@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        albert: ["Albert Sans", "sans-serif"],
         "polysans-thin": ['"PolySans-Thin"', "sans-serif"],
         "polysans-regular": ['"PolySans-Regular"', "sans-serif"],
         "polysans-bold": ['"PolySans-Bold"', "sans-serif"],

@@ -38,7 +38,7 @@ export default async function RecentBlogs() {
         </BlogGrid>
       </div>
       <div className="flex items-center justify-center mt-10 lg:mt-16 gap-4">
-        <Link href="/blogs" className="font-polysans-regular text-md md:text-lg lg:text-xl px-6 py-3 text-white bg-neutral-950 dark:text-neutral-950 dark:bg-neutral-50 rounded-xl">
+        <Link href="/blogs" className="text-md md:text-lg px-6 py-3 text-white bg-neutral-950 dark:text-neutral-950 dark:bg-neutral-50 rounded-xl">
           See all blogs
         </Link>
       </div>

@@ -14,15 +14,15 @@ export default function Intro() {
 
       <h1 className="font-polysans-bold text-center text-5xl md:text-6xl lg:text-8xl font-bold mb-2 md:mb-4">Hello, I'm Nathalie</h1>
       <h2 className="font-ppcirka-regular text-center text-2xl md:text-4xl xl:text-5xl mb-6">I like to write, design and code</h2>
-      <p className="lg:w-[80%] 2xl:w-[70%] font-light md:text-lg lg:text-2xl text-center md:leading-8 lg:leading-10 dark:text-neutral-300">
+      <p className="lg:w-[80%] 4xl:w-[60%] font-light md:text-lg 2xl:text-xl text-center md:leading-8 2xl:leading-9 dark:text-neutral-300">
         This space is a caboodle of my daily ramblings – an abode for my undistributed thoughts, serene thinking and tranquil ideas. Today, I welcome you to my blog, and these are my misadventures!
       </p>
 
       <div className="flex items-center justify-center mt-6 lg:mt-10 gap-4">
-        <Link href="/blogs" className="text-md md:text-lg lg:text-xl px-6 py-3 text-white bg-neutral-950 dark:text-neutral-950 dark:bg-neutral-50 rounded-xl">
+        <Link href="/blogs" className="text-md md:text-lg px-6 py-3 text-white bg-neutral-950 dark:text-neutral-950 dark:bg-neutral-50 rounded-xl">
           Read blog
         </Link>
-        <Link href="/about" className="text-md md:text-lg lg:text-xl px-6 py-3 text-neutral-950 bg-transparent border-2 border-neutral-950 dark:text-neutral-50 dark:border-neutral-50 rounded-xl">
+        <Link href="/about" className="text-md md:text-lg px-6 py-3 text-neutral-950 bg-transparent border-2 border-neutral-950 dark:text-neutral-50 dark:border-neutral-50 rounded-xl">
           Get to know me
         </Link>
       </div>
