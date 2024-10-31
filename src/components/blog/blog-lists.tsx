@@ -30,6 +30,8 @@ export default async function RecentBlogs() {
               .replace(/<h[1-6][^>]*><\/h[1-6]>/g, "")
               .replace(/<\/?h[1-6][^>]*>/g, "")
               .replace(/<br\s*\/?>/g, "")
+              .replace(/<\/?ul[^>]*>/g, "")
+              .replace(/<\/?li[^>]*>/g, " • ")
               .trim();
 
             return <BlogGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} className={gridClass} />;
