@@ -43,7 +43,7 @@ export default function Editor({ initialContent, editable }: EditorProps) {
 
   const navItems = [
     {
-      name: "Edit",
+      name: "Publish",
       useDiv: true,
       icon: <Send className="h-5 w-5" />,
     },

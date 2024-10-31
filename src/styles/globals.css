@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .bn-container * {
-  @apply font-albert !important;
+  @apply font-albert font-normal !important;
 }
 
 @layer base {
@@ -46,7 +46,11 @@
 @layer components {
   .blog-editor .bn-block,
   .blog-editor .bn-block-content {
-    @apply w-full flex flex-col items-center justify-center;
+    @apply w-full flex items-center justify-center;
+  }
+
+  .blog-editor .bn-block-content[data-content-type="bulletListItem"] p.bn-inline-content {
+    @apply mb-0 !important;
   }
 
   .blog-editor .bn-editor {
@@ -108,17 +112,22 @@
 
   .natsu-blog ol,
   ol.bn-inline-content {
-    @apply list-decimal pl-5 my-4;
+    @apply list-decimal pl-5 my-4 w-10/12 max-w-4xl;
   }
 
   .natsu-blog ul,
   ul.bn-inline-content {
-    @apply list-disc pl-5 my-4;
+    @apply list-disc pl-5 my-4 w-10/12 max-w-4xl;
   }
 
   .natsu-blog li,
   li.bn-inline-content {
     @apply my-2;
+  }
+
+  .natsu-blog li > p,
+  li > p.bn-inline-content {
+    @apply mb-0 !important;
   }
 
   .natsu-blog input[type="checkbox"],
