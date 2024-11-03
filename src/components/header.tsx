@@ -1,7 +1,8 @@
 import React from "react";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import ThemeSwitch from "@/components/ui/theme-switch";
-import { Home, NotebookPen, Sun, FilePlus2, LogIn, LogOut } from "lucide-react";
+import { Home, NotebookPen, FilePlus2, LogIn, LogOut } from "lucide-react";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Header() {
   const navItems = [
@@ -31,14 +32,19 @@ export default function Header() {
     },
     {
       name: "LogOut",
-      link: "/api/auth/logout",
-      icon: <LogOut className="h-5 w-5" />,
       requiresAuth: true,
+      useComponent: true,
+      component: (
+        <LogoutLink>
+          <LogOut className="h-5 w-5" />
+        </LogoutLink>
+      ),
     },
     {
       name: "Light",
       requiresAuth: false,
       useComponent: true,
+      useDiv: true,
       component: <ThemeSwitch />,
     },
   ];
