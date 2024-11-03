@@ -14,5 +14,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/new-blog", "/blogs/:id/edit"],
+  matcher: ["/new-blog", "/blogs/:slug/edit"],
 };
