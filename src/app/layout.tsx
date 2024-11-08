@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import ThemeContextProvider from "@/context/theme-context";
 
 export const metadata: Metadata = {
-  title: "Letters Of Nathalie - A Sanctuary Of My Daily Musings",
+  title: "Natsu — No Pseudo Pretenses, Just Me",
 };
 
 const albert = Albert_Sans({ subsets: ["latin"] });
@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${albert.className} !scroll-smooth`}>
+    <html lang="en" className="!scroll-smooth">
+      <body className={`${albert.className}`}>
         <ThemeContextProvider>
           <div className="flex flex-col min-h-screen bg-grid-small-neutral-400/[0.2] relative dark:text-neutral-100 dark:bg-slate-900 overflow-x-hidden">
             <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-white dark:bg-slate-900 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
