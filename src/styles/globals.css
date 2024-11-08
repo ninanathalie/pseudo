@@ -57,6 +57,10 @@
     @apply bg-transparent px-0;
   }
 
+  .blog-editor .bn-editor p.bn-inline-content {
+    @apply font-normal;
+  }
+
   .blog-editor .bn-side-menu {
     @apply absolute left-6 top-1 flex flex-row w-max h-8 !important;
   }
@@ -82,7 +86,11 @@
 
   .natsu-blog p,
   p.bn-inline-content {
-    @apply text-lg font-light mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
+    @apply text-lg mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
+  }
+
+  .natsu-blog > p.bn-inline-content {
+    @apply font-light;
   }
 
   .natsu-blog a,

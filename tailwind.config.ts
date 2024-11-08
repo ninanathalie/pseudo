@@ -15,8 +15,6 @@ const config: Config = {
         "polysans-thin": ['"PolySans-Thin"', "sans-serif"],
         "polysans-regular": ['"PolySans-Regular"', "sans-serif"],
         "polysans-bold": ['"PolySans-Bold"', "sans-serif"],
-        "ppcirka-regular": ['"PPCirka-Regular"', "serif"],
-        "ppcirka-bold": ['"PPCirka-Bold"', " serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
