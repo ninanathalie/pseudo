@@ -14,7 +14,7 @@ export default async function RecentBlogs() {
   });
 
   return (
-    <section className="relative flex items-center justify-center flex-col w-10/12 3xl:w-2/4 max-w-[1440px] mb-[25%] lg:mb-[20%] 2xl:mb-[10%]">
+    <section id="stories" className="relative flex items-center justify-center flex-col w-10/12 3xl:w-2/4 max-w-[1440px] mb-[25%] lg:mb-[20%] 2xl:mb-[10%]">
       <BackgroundBlob variant="center" />
 
       <h2 className="font-polysans-bold text-center text-4xl lg:text-6xl mb-6">Fresh Musings</h2>
