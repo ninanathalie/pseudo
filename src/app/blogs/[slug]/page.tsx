@@ -7,70 +7,43 @@ import { PencilLine } from "lucide-react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { FloatingNav } from "@/components/ui/floating-navbar";
 import BackgroundBlob from "@/components/ui/background-blob";
+import DeleteButton from "@/components/ui/delete-btn";
 
 export default async function SinglePage({ params }: { params: { slug: string } }) {
   const { isAuthenticated } = getKindeServerSession();
 
-  // Fetch the post using the slug instead of the id
   const post = await prisma.post.findUnique({
-    where: {
-      slug: params.slug,
-    },
+    where: { slug: params.slug },
   });
   if (!post) {
     notFound();
   }
 
-  const [previousPost, latestPost] = await Promise.all([
-    prisma.post.findFirst({
-      where: {
-        createdAt: {
-          lt: post.createdAt,
-        },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    }),
-    prisma.post.findFirst({
-      where: {
-        createdAt: {
-          gt: post.createdAt,
-        },
-      },
-      orderBy: {
-        createdAt: "asc",
-      },
-    }),
-  ]);
+  const [previousPost, latestPost] = await Promise.all([prisma.post.findFirst({ where: { createdAt: { lt: post.createdAt } }, orderBy: { createdAt: "desc" } }), prisma.post.findFirst({ where: { createdAt: { gt: post.createdAt } }, orderBy: { createdAt: "asc" } })]);
 
   const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
   const navItems = [
+    { name: "Edit", link: `/blogs/${post.slug}/edit`, icon: <PencilLine className="h-5 w-5" /> },
     {
-      name: "Edit",
-      link: `/blogs/${post.slug}/edit`,
-      icon: <PencilLine className="h-5 w-5" />,
+      name: "Delete",
+      icon: <DeleteButton slug={post.slug} />,
     },
   ];
 
   return (
     <main className="relative w-full flex flex-col items-center justify-center mb-16 lg:mb-24 mt-32 lg:mt-44 z-10">
       <BackgroundBlob variant="center" />
-
       <div className="mb-8 text-center max-w-4xl">
         <h1 className="text-4xl md:text-6xl font-polysans-bold mb-2 leading-10 px-6">{post.title}</h1>
-        <small className="mb-5 text-neutral-400 uppercase  font-polysans-thin">{formattedDate}</small>
+        <small className="mb-5 text-neutral-400 uppercase font-polysans-thin">{formattedDate}</small>
       </div>
-
       {(await isAuthenticated()) && (
         <div className="hidden md:flex">
           <FloatingNav navItems={navItems} className="mr-5 px-4" />
         </div>
       )}
-
       <div className="natsu-blog flex flex-col items-center justify-center" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
-
       <div className="flex justify-between items-start w-full mt-8 md:max-w-4xl px-6 gap-2">
         {previousPost && (
           <Link href={`/blogs/${previousPost.slug}`}>
