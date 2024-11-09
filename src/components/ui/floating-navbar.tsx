@@ -3,7 +3,6 @@
 import React from "react";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export const FloatingNav = ({
   navItems,
@@ -20,8 +19,6 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
-  const { isAuthenticated } = useKindeBrowserClient();
-
   return (
     <div
       className={cn(
@@ -30,10 +27,6 @@ export const FloatingNav = ({
       )}
     >
       {navItems.map((navItem, idx) => {
-        const displayNav = navItem.name === "LogOut" ? isAuthenticated : navItem.name === "LogIn" ? !isAuthenticated : !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
-
-        if (!displayNav) return null;
-
         return (
           <React.Fragment key={`nav-item-${idx}`}>
             {navItem.useComponent ? (
