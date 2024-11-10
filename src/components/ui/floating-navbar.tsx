@@ -22,7 +22,7 @@ export const FloatingNav = ({
   return (
     <div
       className={cn(
-        "flex max-w-fit fixed top-6 inset-x-0 mx-auto border border-transparent rounded-2xl bg-white dark:bg-slate-950/90 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-5 py-2 items-center justify-center space-x-4",
+        "flex max-w-fit fixed top-6 inset-x-0 mx-auto border border-transparent rounded-2xl bg-white dark:bg-slate-950/90 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-40 px-5 py-2 items-center justify-center space-x-4",
         className,
       )}
     >
