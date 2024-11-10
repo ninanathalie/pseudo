@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
@@ -21,6 +22,7 @@ export default function Editor({ initialContent, editable }: EditorProps) {
   const [html, setHTML] = useState("");
   const [textInput, setTextInput] = useState("");
   const [editorContent, setEditorContent] = useState<PartialBlock[]>([]);
+  const router = useRouter();
 
   const editor: BlockNoteEditor = useCreateBlockNote({
     initialContent: initialContent ? (JSON.parse(initialContent) as PartialBlock[]) : undefined,
@@ -38,7 +40,13 @@ export default function Editor({ initialContent, editable }: EditorProps) {
 
   const handleSubmit = async () => {
     const html = await editor.blocksToHTMLLossy(editor.document);
-    submit(html, textInput);
+
+    try {
+      const slug = await submit(html, textInput);
+      router.push(`/blogs/${slug}`);
+    } catch (error) {
+      console.error("Failed to publish post:", error);
+    }
   };
 
   const navItems = [
