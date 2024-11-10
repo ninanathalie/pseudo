@@ -66,7 +66,7 @@ const ImageModal = ({ isOpen, onClose, imageSrc, altText }: ImageModalProps) => 
         <button onClick={onClose} className="absolute top-2 right-2 text-white text-2xl">
           &times;
         </button>
-        <img src={imageSrc} alt={altText} className="max-w-full max-h-full object-contain" />
+        <Image src={imageSrc} alt={altText} width={600} height={600} className="max-w-full max-h-full object-contain" />
       </div>
     </div>
   );
