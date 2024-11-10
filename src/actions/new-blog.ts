@@ -35,4 +35,6 @@ export async function submit(htmlContent: string, textInput: string) {
 
   // Revalidate the blogs path to include the new post
   revalidatePath("/blogs");
+
+  return slug;
 }
