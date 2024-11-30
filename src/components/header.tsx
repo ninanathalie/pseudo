@@ -54,7 +54,7 @@ const navItems = [
     title: "LogOut",
     requiresAuth: true,
     component: (
-      <LogoutLink>
+      <LogoutLink className="after:absolute after:inset-0">
         <LogOut className="w-4 h-4 md:w-full md:h-full" />
       </LogoutLink>
     ),

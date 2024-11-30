@@ -29,7 +29,7 @@ export default function DeleteButton({ slug }: { slug: string }) {
   return (
     <>
       <span onClick={() => setOpen(true)} className="cursor-pointer">
-        <TrashIcon className="h-5 w-5 mr-1" />
+        <TrashIcon className="w-4 h-4 md:w-full md:h-full" />
       </span>
 
       <AlertDialog open={open} onOpenChange={setOpen}>
