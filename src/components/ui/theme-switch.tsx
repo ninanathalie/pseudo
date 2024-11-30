@@ -8,8 +8,8 @@ export default function ThemeSwitch() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button onClick={toggleTheme} className="ml-auto infline-flex flex items-center hover:text-secondary-color mr-4 md:mr-0 md:ml-10">
-      {theme === "light" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-    </button>
+    <div onClick={toggleTheme} className="infline-flex flex items-center cursor-pointer after:absolute after:inset-0">
+      {theme === "light" ? <Sun className="w-4 h-4 md:w-full md:h-full" /> : <Moon className="w-4 h-4 md:w-full md:h-full" />}
+    </div>
   );
 }
