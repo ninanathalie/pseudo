@@ -59,7 +59,13 @@ const IconContainer = ({ mouseX, title, icon, href, component }: FloatingNavItem
         )}
       </AnimatePresence>
       <motion.div style={{ width: iconSize, height: iconSize }} className="flex items-center justify-center">
-        {href ? <Link href={href}>{icon}</Link> : component}
+        {href ? (
+          <Link href={href} className="after:absolute after:inset-0">
+            {icon}
+          </Link>
+        ) : (
+          component
+        )}
       </motion.div>
     </motion.div>
   );

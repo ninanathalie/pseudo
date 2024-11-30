@@ -68,9 +68,8 @@ export default function UpdatePost({ post }: UpdatePostProps) {
 
   const navItems = [
     {
-      name: "Save",
-      useDiv: true,
-      icon: <Save className="h-5 w-5" />,
+      title: "Save",
+      component: <Save className="w-4 h-4 md:w-full md:h-full" />,
     },
   ];
 
@@ -91,7 +90,9 @@ export default function UpdatePost({ post }: UpdatePostProps) {
         onClick={handleSubmit}
         disabled={isSubmitting || !isContentChanged}
       >
-        <FloatingNav navItems={navItems} className="mr-5 px-4 cursor-not-allowed" />
+        <div className="hidden md:flex max-w-fit fixed top-6 right-4 border border-transparent rounded-2xl z-40 ">
+          <FloatingNav items={navItems} />
+        </div>
       </button>
     </section>
   );
