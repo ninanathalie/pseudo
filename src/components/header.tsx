@@ -5,26 +5,12 @@ import { Home, NotebookPen, FilePlus2, LogIn, LogOut } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-interface HeaderProps {
-  isAuthenticated?: boolean;
-}
-
-// This function runs on the server side and passes data to the component
-export async function getServerSideProps() {
+export default async function Header() {
   const session = await getKindeServerSession();
   const isAuthenticated = await session.isAuthenticated();
 
-  return {
-    props: {
-      isAuthenticated,
-    },
-  };
-}
-
-export default function Header({ isAuthenticated }: HeaderProps) {
-  // Filter navItems based on authentication status
   const filteredNavItems = navItems.filter((navItem) => {
-    const displayNav = navItem.name === "LogOut" ? isAuthenticated : navItem.name === "LogIn" ? !isAuthenticated : !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
+    const displayNav = navItem.title === "LogOut" ? isAuthenticated : navItem.title === "LogIn" ? !isAuthenticated : !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
     return displayNav;
   });
 
@@ -32,51 +18,50 @@ export default function Header({ isAuthenticated }: HeaderProps) {
 
   return (
     <div className="relative w-full">
-      <FloatingNav navItems={filteredNavItems} />
+      <div className="flex max-w-fit fixed top-6 inset-x-0 mx-auto border border-transparent rounded-2xl z-40 ">
+        <FloatingNav items={filteredNavItems} />
+      </div>
     </div>
   );
 }
 
 const navItems = [
   {
-    name: "Home",
-    link: "/",
-    icon: <Home className="h-5 w-5" />,
+    title: "Home",
     requiresAuth: false,
+    href: "/",
+    icon: <Home className="w-4 h-4 md:w-full md:h-full" />,
   },
   {
-    name: "Blogs",
-    link: "/blogs",
-    icon: <NotebookPen className="h-5 w-5" />,
+    title: "Blogs",
     requiresAuth: false,
+    href: "/blogs",
+    icon: <NotebookPen className="w-4 h-4 md:w-full md:h-full" />,
   },
   {
-    name: "Write",
-    link: "/new-blog",
-    icon: <FilePlus2 className="h-5 w-5" />,
+    title: "Write",
     requiresAuth: true,
+    href: "/new-blog",
+    icon: <FilePlus2 className="w-4 h-4 md:w-full md:h-full" />,
   },
   {
-    name: "LogIn",
-    link: "/login",
-    icon: <LogIn className="h-5 w-5" />,
+    title: "LogIn",
     requiresAuth: false,
+    href: "/login",
+    icon: <LogIn className="w-4 h-4 md:w-full md:h-full" />,
   },
   {
-    name: "LogOut",
+    title: "LogOut",
     requiresAuth: true,
-    useComponent: true,
     component: (
       <LogoutLink>
-        <LogOut className="h-5 w-5" />
+        <LogOut className="w-4 h-4 md:w-full md:h-full" />
       </LogoutLink>
     ),
   },
   {
-    name: "Light",
+    title: "Light",
     requiresAuth: false,
-    useComponent: true,
-    useDiv: true,
     component: <ThemeSwitch />,
   },
 ];

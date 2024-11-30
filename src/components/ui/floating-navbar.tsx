@@ -1,56 +1,66 @@
 "use client";
 
-import React from "react";
-import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { useRef, useState } from "react";
+import { cn } from "@/utils/cn";
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, MotionValue } from "framer-motion";
 
-export const FloatingNav = ({
-  navItems,
-  className,
-}: {
-  navItems: {
-    name: string;
-    link?: string;
-    icon?: JSX.Element;
-    requiresAuth?: boolean;
-    useDiv?: boolean;
-    useComponent?: boolean;
-    component?: JSX.Element;
-  }[];
+interface FloatingNavItem {
+  title: string;
+  href?: string;
+  icon?: React.ReactNode;
+  component?: React.ReactNode;
   className?: string;
-}) => {
-  return (
-    <div
-      className={cn(
-        "flex max-w-fit fixed top-6 inset-x-0 mx-auto border border-transparent rounded-2xl bg-white dark:bg-slate-950/90 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-40 px-5 py-2 items-center justify-center space-x-4",
-        className,
-      )}
-    >
-      {navItems.map((navItem, idx) => {
-        return (
-          <React.Fragment key={`nav-item-${idx}`}>
-            {navItem.useComponent ? (
-              navItem.component
-            ) : navItem.useDiv ? (
-              <div className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group cursor-pointer">
-                <span>{navItem.icon}</span>
-                <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
-                  {navItem.name}
-                </span>
-              </div>
-            ) : (
-              <Link href={navItem.link || "#"} className="relative items-center flex px-2 py-3 hover:px-4 ease-in-out duration-300 group">
-                <span>{navItem.icon}</span>
-                <span className={cn("absolute z-10 px-3 py-1 text-[0.6rem] tracking-wide uppercase text-white rounded-md shadow-sm bg-zinc-900", "hidden", "group-hover:inline-block")} style={{ top: "100%", left: "50%", transform: "translateX(-50%)" }}>
-                  {navItem.name}
-                </span>
-              </Link>
-            )}
+}
 
-            {(navItem.name === "Blogs" || navItem.name === "LogOut" || navItem.name === "LogIn") && <div className="h-10 min-h-[1.4em] w-px self-stretch bg-zinc-200/90 dark:bg-zinc-200/10 m-auto"></div>}
-          </React.Fragment>
-        );
-      })}
-    </div>
+interface FloatingNavProps {
+  items: FloatingNavItem[];
+  className?: string;
+}
+
+export const FloatingNav = ({ items, className }: FloatingNavProps) => {
+  const mouseX = useMotionValue(Infinity);
+
+  return (
+    <motion.div onMouseMove={(e) => mouseX.set(e.pageX)} onMouseLeave={() => mouseX.set(Infinity)} className={cn("group mx-auto flex h-16 gap-2 md:gap-3 items-start rounded-2xl bg-neutral-50 dark:bg-slate-950/90 px-4 pt-3", className)}>
+      {items.map((item) => (
+        <IconContainer key={item.title} mouseX={mouseX} {...item} />
+      ))}
+    </motion.div>
+  );
+};
+
+const IconContainer = ({ mouseX, title, icon, href, component }: FloatingNavItem & { mouseX: MotionValue<number> }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const distance = useTransform(mouseX, (val) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+
+  const width = useSpring(useTransform(distance, [-150, 0, 150], [42, 70, 42]), { mass: 0.1, stiffness: 150, damping: 12 });
+  const height = useSpring(useTransform(distance, [-150, 0, 150], [42, 70, 42]), { mass: 0.1, stiffness: 150, damping: 12 });
+  const iconSize = useSpring(useTransform(distance, [-150, 0, 150], [20, 40, 20]), { mass: 0.1, stiffness: 150, damping: 12 });
+
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div ref={ref} style={{ width, height }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="aspect-square rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center relative">
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: 2, x: "-50%" }}
+            className="px-2 py-0.5 whitespace-pre rounded-md bg-neutral-100 dark:bg-neutral-800 absolute left-1/2 -translate-x-1/2 -bottom-8 w-fit text-xs"
+          >
+            {title}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div style={{ width: iconSize, height: iconSize }} className="flex items-center justify-center">
+        {href ? <Link href={href}>{icon}</Link> : component}
+      </motion.div>
+    </motion.div>
   );
 };
