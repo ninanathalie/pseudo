@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import ThemeContextProvider from "@/context/theme-context";
 
 export const metadata: Metadata = {
-  title: "Natsu — No Pseudo Pretenses, Just Me",
+  title: "Love, Natnath",
 };
 
 const albert = Albert_Sans({ subsets: ["latin"] });
