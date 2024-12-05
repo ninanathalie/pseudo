@@ -33,10 +33,10 @@ export default async function SinglePage({ params }: { params: { slug: string } 
   ];
 
   return (
-    <main className="relative w-full flex flex-col items-center justify-center mb-16 lg:mb-24 mt-32 lg:mt-44 z-10">
+    <main className="relative w-full flex flex-col items-center justify-center mb-16 lg:mb-24">
       <BackgroundBlob variant="center" />
       <BlurFade delay={0.25} inView className="w-full md:max-w-4xl flex justify-center">
-        <div className="mb-8 text-center max-w-4xl">
+        <div className="mb-8 text-center max-w-4xl mt-32 lg:mt-44 z-10">
           <h1 className="text-4xl md:text-6xl font-polysans-bold mb-2 leading-10 px-6">{post.title}</h1>
           <small className="mb-5 text-neutral-400 uppercase font-polysans-thin">{formattedDate}</small>
         </div>
