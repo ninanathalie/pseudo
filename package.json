@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@blocknote/core": "^0.14.0",
-    "@blocknote/mantine": "^0.14.0",
+    "@blocknote/mantine": "^0.20.0",
     "@blocknote/react": "^0.14.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.4.5",
     "@prisma/client": "^5.15.1",
