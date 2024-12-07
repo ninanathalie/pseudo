@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
@@ -21,6 +22,7 @@ export default function Editor({ initialContent, editable }: EditorProps) {
   const [html, setHTML] = useState("");
   const [textInput, setTextInput] = useState("");
   const [editorContent, setEditorContent] = useState<PartialBlock[]>([]);
+  const router = useRouter();
 
   const editor: BlockNoteEditor = useCreateBlockNote({
     initialContent: initialContent ? (JSON.parse(initialContent) as PartialBlock[]) : undefined,
@@ -38,14 +40,19 @@ export default function Editor({ initialContent, editable }: EditorProps) {
 
   const handleSubmit = async () => {
     const html = await editor.blocksToHTMLLossy(editor.document);
-    submit(html, textInput);
+
+    try {
+      const slug = await submit(html, textInput);
+      router.push(`/blogs/${slug}`);
+    } catch (error) {
+      console.error("Failed to publish post:", error);
+    }
   };
 
   const navItems = [
     {
-      name: "Publish",
-      useDiv: true,
-      icon: <Send className="h-5 w-5" />,
+      title: "Publish",
+      component: <Send className="w-4 h-4 md:w-full md:h-full" />,
     },
   ];
 
@@ -60,7 +67,9 @@ export default function Editor({ initialContent, editable }: EditorProps) {
         <BlockNoteView className="blog-editor" editor={editor} editable={editable} theme="light" onChange={handleChange} />
       </div>
       <button className="hidden md:flex" onClick={handleSubmit}>
-        <FloatingNav navItems={navItems} className="mr-5 px-4 cursor-not-allowed" />
+        <div className="hidden md:flex max-w-fit fixed top-6 right-4 border border-transparent rounded-2xl z-40 ">
+          <FloatingNav items={navItems} />
+        </div>
       </button>
     </section>
   );
