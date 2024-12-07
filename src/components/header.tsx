@@ -5,10 +5,23 @@ import { Home, NotebookPen, FilePlus2, LogIn, LogOut } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-export default async function Header() {
+interface HeaderProps {
+  isAuthenticated?: boolean;
+}
+
+// This function runs on the server side and passes data to the component
+export async function getServerSideProps() {
   const session = await getKindeServerSession();
   const isAuthenticated = await session.isAuthenticated();
 
+  return {
+    props: {
+      isAuthenticated,
+    },
+  };
+}
+
+export default function Header({ isAuthenticated }: HeaderProps) {
   // Filter navItems based on authentication status
   const filteredNavItems = navItems.filter((navItem) => {
     const displayNav = navItem.name === "LogOut" ? isAuthenticated : navItem.name === "LogIn" ? !isAuthenticated : !navItem.requiresAuth || (navItem.requiresAuth && isAuthenticated);
