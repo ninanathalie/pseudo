@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import prisma from "@/lib/db";
 
 export default async function RecentBlogs() {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 400));
 
   const recentPosts = await prisma.post.findMany({
     orderBy: {
@@ -18,12 +18,8 @@ export default async function RecentBlogs() {
       <div className="flex w-full items-center justify-center mt-6 lg:mt-10 gap-4">
         <BlurFade delay={0.25} inView className="w-full">
           <BlogGrid className="mx-auto md:auto-rows-[20rem]">
-            {recentPosts.map((post, index) => {
+            {recentPosts.map((post) => {
               const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
-
-              const rowIndex = Math.floor(index / 2);
-              const isEvenRow = rowIndex % 2 === 0;
-              const gridClass = (isEvenRow ? index % 2 === 0 : index % 2 !== 0) ? "md:col-span-2" : "md:col-span-1";
 
               const body = post.body as string;
               const cleanExcerpt = body
@@ -36,7 +32,7 @@ export default async function RecentBlogs() {
                 .replace(/<\/?li[^>]*>/g, " • ")
                 .trim();
 
-              return <BlogGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} className={gridClass} />;
+              return <BlogGridItem key={post.id} title={post.title} description={cleanExcerpt} date={formattedDate} link={`/blogs/${post.slug}`} />;
             })}
           </BlogGrid>
         </BlurFade>
