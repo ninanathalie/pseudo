@@ -24,10 +24,10 @@ export default async function SinglePage({ params }: { params: { slug: string } 
   const formattedDate = format(new Date(post.createdAt), "MMMM dd, yyyy");
 
   const navItems = [
-    { name: "Edit", link: `/blogs/${post.slug}/edit`, icon: <PencilLine className="h-5 w-5" /> },
+    { title: "Edit", href: `/blogs/${post.slug}/edit`, icon: <PencilLine className="w-4 h-4 md:w-full md:h-full" /> },
     {
-      name: "Delete",
-      icon: <DeleteButton slug={post.slug} />,
+      title: "Delete",
+      component: <DeleteButton slug={post.slug} />,
     },
   ];
 
@@ -39,8 +39,8 @@ export default async function SinglePage({ params }: { params: { slug: string } 
         <small className="mb-5 text-neutral-400 uppercase font-polysans-thin">{formattedDate}</small>
       </div>
       {(await isAuthenticated()) && (
-        <div className="hidden md:flex">
-          <FloatingNav navItems={navItems} className="mr-5 px-4" />
+        <div className="hidden md:flex max-w-fit fixed top-6 right-4 border border-transparent rounded-2xl z-40 ">
+          <FloatingNav items={navItems} />
         </div>
       )}
       <div className="natsu-blog flex flex-col items-center justify-center" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
