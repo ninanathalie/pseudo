@@ -1,29 +1,32 @@
 import React from "react";
-import Marquee from "../ui/marquee";
+import Marquee from "@/components/ui/marquee";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 export default function MovingText() {
   return (
     <section className="relative -mx-4 flex flex-col w-full overflow-hidden py-28 lg:py-44 2xl:py-60">
-      <Marquee reverse pauseOnHover className="[--duration:30s]">
-        <div className="flex gap-4">
-          <TextStroke>Tech Enthusiast</TextStroke>
-          <TextFilled>Bipolar Writer</TextFilled>
-        </div>
-      </Marquee>
+      <BlurFade delay={0.5} inView className="w-full">
+        <Marquee reverse pauseOnHover className="[--duration:30s]">
+          <div className="flex gap-4">
+            <TextStroke>Tech Enthusiast</TextStroke>
+            <TextFilled>Bipolar Writer</TextFilled>
+          </div>
+        </Marquee>
 
-      <Marquee pauseOnHover className="[--duration:20s]">
-        <div className="flex gap-4">
-          <TextFilled>Casual Otaku</TextFilled>
-          <TextStroke>Bipolar Writer</TextStroke>
-        </div>
-      </Marquee>
+        <Marquee pauseOnHover className="[--duration:20s]">
+          <div className="flex gap-4">
+            <TextFilled>Casual Otaku</TextFilled>
+            <TextStroke>Bipolar Writer</TextStroke>
+          </div>
+        </Marquee>
 
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
-        <div className="flex gap-4">
-          <TextStroke>Casual Otaku</TextStroke>
-          <TextFilled>Tech Enthusiast</TextFilled>
-        </div>
-      </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s]">
+          <div className="flex gap-4">
+            <TextStroke>Casual Otaku</TextStroke>
+            <TextFilled>Tech Enthusiast</TextFilled>
+          </div>
+        </Marquee>
+      </BlurFade>
     </section>
   );
 }
