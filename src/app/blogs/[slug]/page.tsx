@@ -47,7 +47,7 @@ export default async function SinglePage({ params }: { params: { slug: string } 
         </div>
       )}
       <BlurFade delay={0.5} inView className="w-full md:max-w-4xl flex justify-center">
-        <div className="natsu-blog flex flex-col items-center justify-center" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
+        <div className="natsu-blog flex flex-col items-center justify-center w-full" dangerouslySetInnerHTML={{ __html: post.body || "" }} />
       </BlurFade>
 
       <BlurFade delay={0.75} inView className="w-full md:max-w-4xl flex justify-center">
