@@ -33,12 +33,6 @@ const navItems = [
     icon: <Home className="w-4 h-4 md:w-full md:h-full" />,
   },
   {
-    title: "Blogs",
-    requiresAuth: false,
-    href: "/blogs",
-    icon: <NotebookPen className="w-4 h-4 md:w-full md:h-full" />,
-  },
-  {
     title: "Write",
     requiresAuth: true,
     href: "/new-blog",
