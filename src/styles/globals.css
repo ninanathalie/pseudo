@@ -71,31 +71,31 @@
 
   .natsu-blog h1,
   h1.bn-inline-content {
-    @apply text-5xl font-medium tracking-tight mb-4 xl:mb-8 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
+    @apply w-full text-3xl font-medium tracking-tight mb-4 xl:mb-8 text-neutral-600 dark:text-neutral-300 leading-8 !important;
   }
 
   .natsu-blog h2,
   h2.bn-inline-content {
-    @apply text-4xl font-medium tracking-tight mb-4 xl:mb-8 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
+    @apply w-full text-2xl font-medium tracking-tight mb-4 xl:mb-8 text-neutral-600 dark:text-neutral-300 leading-8 !important;
   }
 
   .natsu-blog h3,
   h3.bn-inline-content {
-    @apply text-2xl font-medium tracking-tight mb-4 xl:mb-6 text-neutral-900 dark:text-neutral-100 leading-10 w-10/12 max-w-4xl !important;
+    @apply w-full text-xl font-medium tracking-tight mb-4 xl:mb-6 text-neutral-600 dark:text-neutral-300 leading-8 !important;
   }
 
   .natsu-blog p,
   p.bn-inline-content {
-    @apply text-lg mb-4 xl:mb-8 text-neutral-800 dark:text-neutral-200 leading-8 w-10/12 max-w-4xl !important;
+    @apply mb-4 text-neutral-700 dark:text-neutral-300 leading-8 !important;
   }
 
   .natsu-blog > p.bn-inline-content {
-    @apply font-light;
+    @apply font-light w-full;
   }
 
   .natsu-blog a,
   a .bn-inline-content {
-    @apply text-blue-500 hover:text-blue-300 font-medium;
+    @apply text-blue-500 hover:text-blue-300 font-light;
   }
 
   .natsu-blog strong,
@@ -120,12 +120,28 @@
 
   .natsu-blog ol,
   ol.bn-inline-content {
-    @apply list-decimal pl-5 my-4 w-10/12 max-w-4xl;
+    @apply list-decimal pl-5 my-4;
   }
 
   .natsu-blog ul,
   ul.bn-inline-content {
-    @apply list-disc pl-5 my-4 w-10/12 max-w-4xl;
+    @apply list-disc pl-5 my-4;
+  }
+
+  .natsu-blog-home ol {
+    @apply flex flex-col items-center;
+
+    & > li {
+      @apply list-decimal pl-2 py-2 max-w-max border-b border-dotted border-neutral-300 dark:border-white/20;
+    }
+  }
+
+  .natsu-blog-home ul {
+    @apply flex flex-col items-center;
+
+    & > li {
+      @apply py-2 max-w-max border-b border-dotted border-neutral-300 dark:border-white/20;
+    }
   }
 
   .natsu-blog li,
