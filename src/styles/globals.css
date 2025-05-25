@@ -44,8 +44,7 @@
 }
 
 @layer components {
-  .blog-editor .bn-block,
-  .blog-editor .bn-block-content {
+  .blog-editor .bn-block {
     @apply w-full flex items-center justify-center;
   }
 

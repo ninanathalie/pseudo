@@ -74,13 +74,13 @@ export default function UpdatePost({ post }: UpdatePostProps) {
   ];
 
   return (
-    <section className="relative">
+    <section className="relative w-full md:max-w-4xl">
       <BackgroundBlob variant="center" />
 
-      <div className="mb-8 text-center w-full">
-        <TextareaAutoSize value={textInput} onChange={handleTextInputChange} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
+      <div className="mb-8 text-center w-full md:max-w-4xl">
+         <TextareaAutoSize value={textInput} onChange={handleTextInputChange} placeholder="Untitled" className="text-center w-full resize-none appearance-none overflow-hidden bg-transparent text-4xl md:text-6xl font-polysans-bold mb-2 focus:outline-none" />
       </div>
-      <div className="-mx-12">
+      <div className="-mx-12 w-full md:max-w-4xl">
         <BlockNoteView className="blog-editor" editor={editor} editable={true} theme="light" onChange={handleChange} />
       </div>
       <button
